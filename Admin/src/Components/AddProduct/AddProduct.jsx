@@ -30,7 +30,7 @@ const AddProduct = () => {
      let formData = new FormData();
      formData.append('product',image);
 
-    await fetch('http://localhost:4001/upload',{
+    await fetch('https://fashioncore-backend.onrender.com/upload',{
       method:'POST',
       headers:{
         Accept:'application/json',
@@ -42,7 +42,7 @@ const AddProduct = () => {
     {
       product.image = responseData.image_url;
       console.log(product);
-      await fetch('http://localhost:4001/addproduct',{
+      await fetch('https://fashioncore-backend.onrender.com/addproduct',{
         method:'POST',
         headers:{
           Accept:'application/json',
