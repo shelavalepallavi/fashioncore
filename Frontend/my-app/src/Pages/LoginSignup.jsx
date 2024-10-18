@@ -9,12 +9,12 @@ const LoginSignup = () => {
     password:"",
     email:""
   })
+  
 
   const changeHandler = (e)=>{
     setFormData({...formData,[e.target.name]:e.target.value})
 
   }
-
   const login = async () =>{
     console.log("Login Function Executed",formData);
     let responseData;
