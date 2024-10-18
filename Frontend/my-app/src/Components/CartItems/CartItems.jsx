@@ -20,7 +20,7 @@ const CartItems = () => {
     const headers = {
       "Content-Type": "application/json"
     }
-    const response = await fetch("http://localhost:4000/api/create-checkout-session",{
+    const response = await fetch("https://fashioncore-backend.onrender.com/api/create-checkout-session",{
       method:"POST",
       headers:headers,
       body:JSON.stringify(body)
