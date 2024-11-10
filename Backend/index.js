@@ -9,6 +9,7 @@ const cors = require("cors");
 const stripe = require("stripe")("sk_test_51P5OVpSGFGg5EqlU2aDVwmfZCbbfHrmVg5zI8fcxKoYrBb3a6VTnPQJXhZqZTJYqeMWIiTC6jnrv1x4s7AC9E5BE00AZtn91Wt");
 
 
+
 app.use(express.json());
 app.use(cors());
 
