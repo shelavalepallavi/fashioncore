@@ -39,7 +39,7 @@ const ShopContextProvider = (props) => {
         .then((data) => setCartItems(data))
         .catch((error) => console.error("Error fetching cart:", error));
     }
-  }, [backendUrl]);
+  }, []);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
