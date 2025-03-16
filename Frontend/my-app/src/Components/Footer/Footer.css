@@ -77,3 +77,8 @@
     font-size: 13px;
   }
 }
+@media(max-width:500px){
+  .footer-links{
+    flex-wrap: wrap;
+  }
+}

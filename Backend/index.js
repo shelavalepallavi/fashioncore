@@ -6,15 +6,19 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const stripe = require("stripe")("sk_test_51P5OVpSGFGg5EqlU2aDVwmfZCbbfHrmVg5zI8fcxKoYrBb3a6VTnPQJXhZqZTJYqeMWIiTC6jnrv1x4s7AC9E5BE00AZtn91Wt");
-
-
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
 
 //Database Connection with MongoDB
-mongoose.connect("mongodb+srv://website01:21314151@cluster0.7puxez5.mongodb.net/e-commerce");
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("MongoDB connected successfully"))
+.catch(err => console.error("MongoDB connection error:", err));
 
 
 //API creation
@@ -266,50 +270,7 @@ app.post('/getcart',fetchUser,async (req,res)=>{
     res.json(userData.cartData);
 })
 
-//checkout api
-app.post("/api/create-checkout-session",async(req,res)=>{
-  const {products} = req.body;
- 
-  const LineItemGenerator = {
-    generateLineItems(products) {
-      return products.map((product) => ({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: product.name
-          },
-          unit_amount: product.new_price * 100,
-        },
-        quantity: product.id
-      }));
-    }
-  };
 
-  const lineItems = LineItemGenerator.generateLineItems(products);
-
-  // const lineItems = products.map((product)=>({
-  //   price_data:{
-  //     currency:"usd",
-  //     product_data:{
-  //       name:product.name
-  //     },
-  //     unit_amount:product.new_price * 100,
-  //   },
-  //   quantity:product.id
-
-  // }));
-
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types:["card"],
-    line_items:lineItems,
-    mode:"payment",
-    success_url:"http://localhost:3000/success",
-    cancel_url:"http://localhost:3000/cancel",
-  });
-
-  res.json({id:session.id})
-  
-})
 
 
 app.listen(port,(error)=>{

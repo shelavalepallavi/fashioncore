@@ -7,6 +7,7 @@ import { ShopContext } from '../../Context/ShopContext';
 const ProductDisplay = (props) => {
     const {product}= props;
     const {addToCart} = useContext(ShopContext);
+    
   return (
     <div className='productdisplay'>
       <div className="productdisplay-left">
@@ -42,7 +43,7 @@ const ProductDisplay = (props) => {
            A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and sleeves and short sleeves, worn as a undershirt or outer garment.
         </div>
         <div className="productdisplay-right-size">
-          <h1>Select Size</h1>
+          <h3>Select Size</h3>
           <div className="productdisplay-right-sizes">
             <div>S</div>
             <div>M</div>
@@ -52,7 +53,7 @@ const ProductDisplay = (props) => {
           </div>
         </div>
         <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
-        <p className="productdisplay-right-category"><span>Category :</span> Women, T-Shirt, Crop Top</p>
+        <p className="productdisplay-right-category"><span>Category :</span> T-Shirt, Crop Top</p>
         <p className="productdisplay-right-category"><span>Tags :</span> Modern, Latest</p>
       </div>
     </div>

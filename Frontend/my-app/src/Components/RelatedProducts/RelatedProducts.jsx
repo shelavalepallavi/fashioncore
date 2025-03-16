@@ -4,6 +4,8 @@ import data_products from '../Assets/data'
 import Item from '../Item/Item'
 
 const RelatedProducts = () => {
+ 
+
   return (
     <div className='relatedproducts'>
       <h1>Related Products</h1>

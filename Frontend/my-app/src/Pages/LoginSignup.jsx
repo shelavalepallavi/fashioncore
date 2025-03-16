@@ -10,6 +10,7 @@ const LoginSignup = () => {
     email:""
   })
   
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   const changeHandler = (e)=>{
     setFormData({...formData,[e.target.name]:e.target.value})
@@ -18,7 +19,7 @@ const LoginSignup = () => {
   const login = async () =>{
     console.log("Login Function Executed",formData);
     let responseData;
-    await fetch('https://fashioncore-backend.onrender.com/login',{
+    await fetch(`${backendUrl}/login`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -39,7 +40,7 @@ const LoginSignup = () => {
   const signup = async () =>{
     console.log("Signup Function Executed",formData);
     let responseData;
-    await fetch('https://fashioncore-backend.onrender.com/signup',{
+    await fetch(`${backendUrl}/signup`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',

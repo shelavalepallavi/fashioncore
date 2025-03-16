@@ -14,7 +14,7 @@
 
 .newsletter h1{
   color: #454545;
-  font-size: 55px;
+  font-size: 45px;
   font-weight: 600;
 }
 
@@ -29,7 +29,7 @@
   justify-content: space-between;
   background: white;
   width: 730px;
-  height: 70px;
+  height: 55px;
   border-radius: 80px;
   border: 1px solid #e3e3e3;
 }
@@ -46,7 +46,7 @@
 
 .newsletter div button{
   width: 210px;
-  height: 70px;
+  height: 55px;
   border-radius: 80px;
   background: black;
   color: white;

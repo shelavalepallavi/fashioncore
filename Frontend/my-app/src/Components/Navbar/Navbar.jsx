@@ -21,9 +21,11 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <div className="nav-logo">
+      <div className="">
+        <Link to='/' className='nav-logo'>
         <img src={logo} alt="" />
         <p>FashionCore</p>
+        </Link>
       </div>
       <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="" />
       <ul ref={menuRef} className="nav-menu">

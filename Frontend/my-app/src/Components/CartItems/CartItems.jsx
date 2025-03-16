@@ -2,42 +2,11 @@ import React, { useContext } from "react";
 import "./CartItems.css";
 import { ShopContext } from "../../Context/ShopContext";
 import remove_icon from "../Assets/cart_cross_icon.png";
-import {loadStripe} from '@stripe/stripe-js';
-
 
 
 
 const CartItems = () => {
   const {getTotalCartAmount,all_product, cartItems, removeFromCart } = useContext(ShopContext);
-
-  //payment integration
-  const makePayment = async()=>{
-    const stripe = await loadStripe("pk_test_51P5OVpSGFGg5EqlUUyaodlNYQURq1aFPki91kNPiWKEmiJBexY99bOefBR3saZ174rrrH5pw9hW252cWlxd6rWZW00sfYbxBeV");
-
-    const body = {
-      products: cartItems
-    }
-    const headers = {
-      "Content-Type": "application/json"
-    }
-    const response = await fetch("https://fashioncore-backend.onrender.com/api/create-checkout-session",{
-      method:"POST",
-      headers:headers,
-      body:JSON.stringify(body)
-    });
-    
-
-    const session = await response.json();
-
-    const result = stripe.redirectToCheckout({
-      sessionId:session.id
-    });
-
-    if(result.error){
-      console.log(result.error);
-    }
-
-  }
 
   return (
     <div className="cartitems">
@@ -53,7 +22,7 @@ const CartItems = () => {
       {all_product.map((e)=>{
         if(cartItems[e.id]>0)
         {
-          return <div>
+          return <div key={e.id}>
           <div className="cartitems-format cartitems-format-main">
             <img src={e.image} alt="" className="carticon-product-icon"/>
             <p>{e.name}</p>
@@ -86,7 +55,7 @@ const CartItems = () => {
               <h3>${getTotalCartAmount()}</h3>
             </div>
           </div>
-          <button onClick={makePayment}>PROCEED TO CHECKOUT</button>
+          <button>PROCEED TO CHECKOUT</button>
           {/* {Loadscript} */}
         </div>
         <div className="cartitems-promocode">
