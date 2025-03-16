@@ -12,19 +12,37 @@ const Item = (props) => {
 
  
 
-    // Handle images served from backend
-    if (props.image && props.image.startsWith('http://localhost:4000')) {
-      new_image_path = props.image.replace('http://localhost:4000', backendUrl);
-    } 
-    // Handle relative backend images (e.g., "/images/product_123.jpg")
-    else if (props.image && props.image.startsWith('/images')) {
+ 
+    // if (props.image && props.image.startsWith('http://localhost:4000')) {
+    //   new_image_path = props.image.replace('http://localhost:4000', backendUrl);
+    // } 
+    
+    // else if (props.image && props.image.startsWith('/images')) {
+    //   new_image_path = `${backendUrl}${props.image}`;
+    // }
+    // else if (props.image && props.image.startsWith('/static')) {
+    //   new_image_path = props.image; 
+    // }
+
+    if (!props.image) {
+      new_image_path = '/static/default-image.png'; // Fallback image
+    }
+    // Handle backend images (e.g., "/images/product_123.jpg")
+    else if (props.image.startsWith('/images')) {
       new_image_path = `${backendUrl}${props.image}`;
     }
-    // Handle images stored in public folder or React build assets (like "/static/media/")
-    else if (props.image && props.image.startsWith('/static')) {
-      new_image_path = props.image; // Leave it as is (React will handle it)
+    // Ensure backend-served images from localhost are fixed
+    else if (props.image.startsWith('http://localhost:4000')) {
+      new_image_path = props.image.replace('http://localhost:4000', backendUrl);
     }
-
+    // Ensure all backend-served images use HTTPS to avoid mixed-content errors
+    else if (props.image.startsWith('http://') && !props.image.startsWith('/static')) {
+      new_image_path = props.image.replace('http://', 'https://');
+    }
+    // Do NOT modify images stored in /static/... or external CDN links
+    else {
+      new_image_path = props.image;
+    }
   return (
     <div className='item'>
       <Link to={`/product/${props.id}`}>
